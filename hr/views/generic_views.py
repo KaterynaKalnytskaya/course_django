@@ -1,6 +1,4 @@
 import datetime
-
-from django.contrib import messages
 from django.db.models import Q
 from django.shortcuts import render
 from django.urls import reverse_lazy

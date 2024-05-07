@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 import random
-from faker import Faker
 from hr.models import Employee, Position, Department
+from faker import Faker
 
 fake = Faker()
 
@@ -18,33 +18,33 @@ class Command(BaseCommand):
         positions = []
         for _ in range(10):
             department = random.choice(departments)
-            monthly_rate = random.randint(10000, 30000)  # Generating random monthly rate
+            monthly_rate = random.randint(10000, 30000)
             position = Position.objects.create(
                 title=fake.job(),
                 department=department,
                 is_active=True,
-                monthly_rate=monthly_rate,  # Setting monthly rate
+                monthly_rate=monthly_rate,
             )
             positions.append(position)
 
         hr_department = random.choice(departments)
-        hr_monthly_rate = random.randint(10000, 30000)  # Generating random monthly rate for HR Manager
+        hr_monthly_rate = random.randint(10000, 30000)
         hr_position = Position.objects.create(
             title='HR Manager',
             department=hr_department,
             is_active=True,
             is_manager=True,
-            monthly_rate=hr_monthly_rate,  # Setting monthly rate for HR Manager
+            monthly_rate=hr_monthly_rate,
         )
         positions.append(hr_position)
 
         for _ in range(100):
             first_name = fake.first_name()
             last_name = fake.last_name()
-            username = fake.unique.user_name()  # Ensure unique username
+            username = fake.unique.user_name()
             email = username + '@example.com'
             password = 'password123'
-            employee = Employee.objects.create_user(
+            Employee.objects.create_user(
                 username=username,
                 first_name=first_name,
                 last_name=last_name,
